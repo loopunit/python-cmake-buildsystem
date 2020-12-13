@@ -41,9 +41,14 @@ include(CMakeParseArguments)
 include(CTest)
 
 # Options
+option(DOWNLOADED_SOURCES "Python source location" ${CMAKE_CURRENT_SOURCE_DIR})
 option(DOWNLOAD_SOURCES "Automatically download the Python sources" ON)
 set(_build_libpython_shared_default  0)
 set(_build_libpython_shared_desc "Build libpython as a shared library")
+
+if (NOT ${DOWNLOAD_SOURCES})
+  set(SRC_DIR ${DOWNLOADED_SOURCES})
+endif()
 
 if(DEFINED BUILD_SHARED OR DEFINED BUILD_STATIC)
   message(AUTHOR_WARNING "Deprecated options `BUILD_SHARED` or `BUILD_STATIC` are set, "
